@@ -32,7 +32,7 @@ public class LoginView extends VerticalLayout {
 
 		FormLayout loginLayout = new FormLayout();
 
-		final TextField usernameField = new TextField("Username");
+		final TextField usernameField = new TextField("Abusername");
 		usernameField.setId("username-field");
 		final PasswordField passwordField = new PasswordField("Password");
 		passwordField.setId("password-field");
