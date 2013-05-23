@@ -19,6 +19,7 @@ public class PostsView extends VerticalLayout implements View {
 	private VerticalLayout postsLayout;
 
 	public PostsView() {
+		addStyleName(TrainingTheme.PostsView.STYLENAME);
 		setMargin(true);
 		createBaseLayouts();
 		addHeader();
@@ -29,12 +30,14 @@ public class PostsView extends VerticalLayout implements View {
 		wrapper = new VerticalLayout();
 		wrapper.setWidth("400px");
 		wrapper.setSpacing(true);
+		wrapper.addStyleName(TrainingTheme.PostsView.WRAPPER);
 		addComponent(wrapper);
 		setComponentAlignment(wrapper, Alignment.TOP_CENTER);
 	}
 
 	private void addHeader() {
 		HorizontalLayout headerLayout = new HorizontalLayout();
+		headerLayout.addStyleName(TrainingTheme.PostsView.HEADER);
 		headerLayout.setSpacing(true);
 
 		headerLayout.setWidth("100%");
@@ -53,13 +56,18 @@ public class PostsView extends VerticalLayout implements View {
 
 		});
 		postButton.setId("post-button");
+		postButton.addStyleName(TrainingTheme.BUTTON_DEFAULT);
+		postButton.addStyleName(TrainingTheme.BUTTON_SMALL);
 		headerLayout.addComponents(statusField, postButton);
+		headerLayout
+				.setComponentAlignment(statusField, Alignment.MIDDLE_CENTER);
 		headerLayout.setExpandRatio(statusField, 1.0f);
 		wrapper.addComponent(headerLayout);
 	}
 
 	private void addContentArea() {
 		postsLayout = new VerticalLayout();
+		postsLayout.addStyleName(TrainingTheme.PostsView.POSTS_LAYOUT);
 		postsLayout.setSpacing(true);
 		wrapper.addComponent(postsLayout);
 	}
@@ -73,7 +81,7 @@ public class PostsView extends VerticalLayout implements View {
 	public static class PostLayout extends CssLayout {
 
 		public PostLayout(String content) {
-			addStyleName("post");
+			addStyleName(TrainingTheme.PostsView.POST);
 			addComponent(new Label(content));
 			setWidth("100%");
 		}

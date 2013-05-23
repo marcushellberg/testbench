@@ -17,6 +17,7 @@ public class LoginView extends VerticalLayout {
 	private Label errorLabel;
 
 	public LoginView(TBDemoUI ui) {
+		addStyleName(TrainingTheme.LoginView.STYLENAME);
 		this.ui = ui;
 		setSizeFull();
 		addLoginBox();
@@ -24,7 +25,7 @@ public class LoginView extends VerticalLayout {
 
 	private void addLoginBox() {
 		loginBox = new VerticalLayout();
-		loginBox.addStyleName("login-box");
+		loginBox.addStyleName(TrainingTheme.LoginView.LOGIN_BOX);
 		loginBox.setSizeUndefined();
 		loginBox.setSpacing(true);
 		loginBox.setMargin(true);
@@ -50,6 +51,8 @@ public class LoginView extends VerticalLayout {
 		});
 
 		loginButton.setId("login-button");
+		loginButton.addStyleName(TrainingTheme.BUTTON_DEFAULT);
+
 		loginBox.addComponents(loginLayout, loginButton);
 		loginBox.setComponentAlignment(loginButton, Alignment.BOTTOM_RIGHT);
 
@@ -64,6 +67,7 @@ public class LoginView extends VerticalLayout {
 		} else {
 			errorLabel = new Label("Error logging in!");
 			errorLabel.setId("error-label");
+			errorLabel.addStyleName(TrainingTheme.ERROR_LABEL);
 			loginBox.addComponent(errorLabel);
 		}
 	}
