@@ -30,7 +30,7 @@ public class TestPost extends TestBenchTestCase {
 	public void setUp() throws Exception {
 		driver.get(concatUrl(baseUrl, "/TestBenchDemo/"));
 		// Login before each test
-		new LoginPO(driver).loginWithValidCredentials();
+		new LoginPO(driver).loginWithCredentials("a", "a");
 		postPage = new PostPO(driver);
 		assertTrue(postPage.isDisplayed());
 	}

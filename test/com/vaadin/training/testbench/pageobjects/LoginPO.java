@@ -39,7 +39,7 @@ public class LoginPO {
 		return getErrorLabel() != null;
 	}
 
-	public boolean errorContains(String errorText) {
+	public boolean errorMessageContains(String errorText) {
 		return getErrorLabel().getText().contains(errorText);
 	}
 
@@ -52,9 +52,9 @@ public class LoginPO {
 				&& loginButton.isDisplayed();
 	}
 
-	public void loginWithValidCredentials() {
-		enterUsername("a");
-		enterPassword("a");
+	public void loginWithCredentials(String username, String password) {
+		enterUsername(username);
+		enterPassword(password);
 		submitLogin();
 	}
 

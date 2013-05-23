@@ -40,7 +40,7 @@ public class TestLogin extends TestBenchTestCase {
 		loginPage.submitLogin();
 
 		assertTrue(loginPage.hasErrors());
-		assertTrue(loginPage.errorContains("Error"));
+		assertTrue(loginPage.errorMessageContains("Error"));
 	}
 
 	@Test
