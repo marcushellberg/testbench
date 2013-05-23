@@ -1,7 +1,6 @@
 package com.vaadin.training.testbench;
 
 import com.vaadin.annotations.Theme;
-import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -51,7 +50,6 @@ public class TBDemoUI extends UI {
 		headerLayout.setWidth("100%");
 		final TextField statusField = new TextField();
 		statusField.focus();
-		statusField.setInputPrompt("Enter Status");
 		statusField.setWidth("100%");
 		Button postButton = new Button("Post status", new ClickListener() {
 
@@ -63,7 +61,6 @@ public class TBDemoUI extends UI {
 			}
 
 		});
-		postButton.setClickShortcut(KeyCode.ENTER);
 		headerLayout.addComponents(statusField, postButton);
 		headerLayout.setExpandRatio(statusField, 1.0f);
 		wrapper.addComponent(headerLayout);
