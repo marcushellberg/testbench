@@ -2,33 +2,45 @@ package com.vaadin.training.testbench;
 
 import static org.junit.Assert.assertTrue;
 
-import org.junit.AfterClass;
+import java.io.IOException;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.TestBench;
 import com.vaadin.testbench.TestBenchTestCase;
 import com.vaadin.training.testbench.pageobjects.LoginPO;
 import com.vaadin.training.testbench.pageobjects.PostPO;
 
 public class TestLogin extends TestBenchTestCase {
-	private static WebDriver driver;
 	private static String baseUrl;
 	private LoginPO loginPage;
 
 	@BeforeClass
 	public static void setupClass() {
-		driver = TestBench.createDriver(new FirefoxDriver());
 		baseUrl = "http://localhost:8080/";
+
+		// Define the default directory for reference screenshots
+		Parameters.setScreenshotReferenceDirectory("src/screenshots");
+
+		// Define the directory where possible error files and screenshots
+		// should go
+		Parameters.setScreenshotErrorDirectory("build/screenshot_errors");
+
+		// Capture a screenshot if no reference image is found
+		Parameters.setCaptureScreenshotOnFailure(true);
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		driver.get(concatUrl(baseUrl, "/TestBenchDemo/"));
-		loginPage = new LoginPO(driver);
+		setDriver(TestBench.createDriver(new FirefoxDriver()));
+		getDriver().get(concatUrl(baseUrl, "/TestBenchDemo/"));
+		testBench().resizeViewPortTo(800, 600);
+		loginPage = new LoginPO(getDriver());
 		assertTrue(loginPage.isDisplayed());
 	}
 
@@ -54,9 +66,14 @@ public class TestLogin extends TestBenchTestCase {
 		assertTrue(new PostPO(driver).isDisplayed());
 	}
 
-	@AfterClass
-	public static void tearDownClass() throws Exception {
-		driver.quit();
+	@Test
+	public void testLoginBoxStyles() throws IOException, AssertionError {
+		assertTrue(testBench().compareScreen("loginBox"));
+	}
+
+	@After
+	public void tearDownClass() throws Exception {
+		getDriver().quit();
 	}
 
 }
