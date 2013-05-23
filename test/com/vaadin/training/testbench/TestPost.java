@@ -1,45 +1,72 @@
 package com.vaadin.training.testbench;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.vaadin.testbench.By;
 import com.vaadin.testbench.TestBench;
 import com.vaadin.testbench.TestBenchTestCase;
+import com.vaadin.training.testbench.pageobjects.PostPO;
 
 public class TestPost extends TestBenchTestCase {
-	private WebDriver driver;
-	private String baseUrl;
+	private static WebDriver driver;
+	private static String baseUrl;
+	private PostPO postPage;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeClass
+	public static void setupClass() {
 		driver = TestBench.createDriver(new FirefoxDriver());
 		baseUrl = "http://localhost:8080/";
 	}
 
+	@Before
+	public void setUp() throws Exception {
+		driver.get(concatUrl(baseUrl, "/TestBenchDemo/"));
+		postPage = new PostPO(driver);
+	}
+
 	@Test
 	public void testPost() throws Exception {
-		driver.get(concatUrl(baseUrl, "/TestBenchDemo/"));
-		WebElement statusField = driver.findElement(By.id("status-field"));
-		WebElement postButton = driver.findElement(By.id("post-button"));
+		String status = "hello";
+		postPage.enterStatus(status);
+		postPage.postStatus();
 
-		testBenchElement(statusField).click(197, 5);
-		statusField.clear();
-		statusField.sendKeys("hello");
-		statusField.sendKeys(Keys.RETURN);
-		postButton.click();
-		assertTrue(driver.getPageSource().contains("hello"));
+		assertEquals("Incorrect number of posts found", 1,
+				postPage.getPostCount());
+		assertTrue("Post did not contain correct text",
+				postPage.postContainsText(0, status));
 	}
 
-	@After
-	public void tearDown() throws Exception {
+	@Test
+	public void testPostOrder() {
+		String firstStatus = "first";
+		String secondStatus = "second";
+
+		postPage.enterStatus(firstStatus);
+		postPage.postStatus();
+
+		postPage.enterStatus(secondStatus);
+		postPage.postStatus();
+
+		assertEquals("Incorrect number of posts found", 2,
+				postPage.getPostCount());
+
+		// Newest post should be on top
+		assertTrue("Posts were in incorrect order",
+				postPage.postContainsText(0, secondStatus));
+		assertTrue("Posts were in incorrect order",
+				postPage.postContainsText(1, firstStatus));
+	}
+
+	@AfterClass
+	public static void tearDownClass() throws Exception {
 		driver.quit();
 	}
+
 }

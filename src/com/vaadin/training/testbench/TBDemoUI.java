@@ -76,7 +76,7 @@ public class TBDemoUI extends UI {
 
 	private void addPost(String content) {
 		PostLayout postLayout = new PostLayout(content);
-		postsLayout.addComponent(postLayout);
+		postsLayout.addComponent(postLayout, 0);
 		postsLayout.setComponentAlignment(postLayout, Alignment.MIDDLE_CENTER);
 	}
 
