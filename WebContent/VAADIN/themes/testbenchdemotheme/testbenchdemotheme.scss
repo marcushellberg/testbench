@@ -8,7 +8,8 @@
   /* Include all the styles from the reindeer theme */
   @include reindeer;
 
-  .post {
+  .post,
+  .login-box {
 	  background: #fff;
 	  border: 1px solid #ccc;
 	  padding: 10px;

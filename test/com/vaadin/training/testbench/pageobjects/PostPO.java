@@ -1,7 +1,5 @@
 package com.vaadin.training.testbench.pageobjects;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -18,13 +16,8 @@ public class PostPO {
 	public PostPO(WebDriver driver) {
 
 		this.driver = driver;
-		WebElement statusFieldElement = driver.findElement(By
-				.id("status-field"));
-		statusField = new TextFieldPO(statusFieldElement);
+		statusField = new TextFieldPO(driver.findElement(By.id("status-field")));
 		postButton = driver.findElement(By.id("post-button"));
-
-		assertNotNull(statusFieldElement);
-		assertNotNull(postButton);
 	}
 
 	public void enterStatus(String status) {
@@ -47,4 +40,7 @@ public class PostPO {
 		return driver.findElements(By.className("post"));
 	}
 
+	public boolean isDisplayed() {
+		return statusField.isDisplayed() && postButton != null;
+	}
 }

@@ -16,4 +16,8 @@ public class TextFieldPO {
 		fieldElement.sendKeys(text);
 		fieldElement.sendKeys(Keys.RETURN);
 	}
+
+	public boolean isDisplayed() {
+		return fieldElement.isDisplayed();
+	}
 }

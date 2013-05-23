@@ -12,6 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.vaadin.testbench.TestBench;
 import com.vaadin.testbench.TestBenchTestCase;
+import com.vaadin.training.testbench.pageobjects.LoginPO;
 import com.vaadin.training.testbench.pageobjects.PostPO;
 
 public class TestPost extends TestBenchTestCase {
@@ -28,7 +29,10 @@ public class TestPost extends TestBenchTestCase {
 	@Before
 	public void setUp() throws Exception {
 		driver.get(concatUrl(baseUrl, "/TestBenchDemo/"));
+		// Login before each test
+		new LoginPO(driver).loginWithValidCredentials();
 		postPage = new PostPO(driver);
+		assertTrue(postPage.isDisplayed());
 	}
 
 	@Test
