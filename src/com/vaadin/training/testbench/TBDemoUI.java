@@ -49,6 +49,7 @@ public class TBDemoUI extends UI {
 
 		headerLayout.setWidth("100%");
 		final TextField statusField = new TextField();
+		statusField.setId("status-field");
 		statusField.focus();
 		statusField.setWidth("100%");
 		Button postButton = new Button("Post status", new ClickListener() {
@@ -61,6 +62,7 @@ public class TBDemoUI extends UI {
 			}
 
 		});
+		postButton.setId("post-button");
 		headerLayout.addComponents(statusField, postButton);
 		headerLayout.setExpandRatio(statusField, 1.0f);
 		wrapper.addComponent(headerLayout);
