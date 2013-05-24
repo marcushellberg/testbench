@@ -1,6 +1,3 @@
-/* Import the reindeer theme.*/
-/* This only allows us to use the mixins defined in it and does not add any styles by itself. */
-@import "../chameleon/chameleon.scss";
 
 /* This contains all of your theme.*/
 /* If somebody wants to extend the theme she will include this mixin. */
@@ -11,10 +8,8 @@
 	  border-radius: 6px;
 }
   
-@mixin testbenchdemotheme {
-  /* Include all the styles from the reindeer theme */
-  @include chameleon;
  
+@mixin testbenchdemotheme { 
   .error-label {
 	  font-weight: bold;
   }
@@ -29,5 +24,11 @@
   	.post {
 	  	@include content-box;
   	}  
+  }
+  
+  .other-view {
+	  .post {
+		  font-size: 100px;
+	  }
   }
 }
